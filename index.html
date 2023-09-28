@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style>
+        #team-stuff {
+	width: 48%;
+	float: left;
+	}
+	#output {
+		width: 48%;
+		float: right;
+	}
+</style>
+</head>
+
+<body>
+    <div id="team-stuff">
+        <form action="begin-create-done.html" method="get">
+            Team: <input type="text" name="firstname">     Record: <input type="text" name="lastname">     Pvs: <input type="text" name="user">     LW: <input type="text" name="pass">
+            <br>
+            Comment: <input type="text" name="comment"><br>
+            <!-- <input type="submit" value="Submit"> -->
+            Team: <input type="text" name="firstname2">
+            <br>
+            Record: <input type="text" name="lastname2">
+            <br>
+            Pvs: <input type="text" name="user2">
+            <br>
+            LW: <input type="text" name="pass2">
+            <br>
+            Comment: <input type="text" name="comment2"><br>
+            <!-- <input type="submit" value="Submit"> -->
+        </form>
+    </div>
+    <div id="output">
+        <h3>Results</h3>
+        <!-- formValues.firstname = <span id="firstname"></span><br>
+    formValues.lastname = <span id="lastname"></span><br>
+    formValues.user = <span id="user"></span><br>
+    formValues.pass = <span id="pass"></span> -->
+        <h2>Class 5A</h2>
+        <table border="0" width="100%" cellspacing="3" cellpadding="3">
+            <tr bgcolor="#E8E8E8">
+                <td><strong>1. <span id="firstname"></span></strong></td>
+                <td align="right"><span id="lastname"></span></td>
+                <td align="right"><span id="user"></span></td>
+                <td align="right"><span id="pass"></span></td>
+            </tr>
+            <tr>
+                <td colspan="4"><strong>Comment:</strong> <span id="comment"></span></td>
+            </tr>
+            <tr bgcolor="#E8E8E8">
+                <td><strong>2. <span id="firstname2"></span></strong></td>
+                <td align="right"><span id="lastname2"></span></td>
+                <td align="right"><span id="user2"></span></td>
+                <td align="right"><span id="pass2"></span></td>
+            </tr>
+            <tr>
+                <td colspan="4"><strong>Comment:</strong> <span id="comment2"></span></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+    // create the object that will hold the input values
+    var formValues = {};
+
+    function inputObj(formNR, defaultValues) {
+        var inputs = formNR.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            formValues[inputs[i].name] = defaultValues[i];
+            if (inputs[i].type === 'text' || inputs[i].type === 'password') {
+                inputs[i].value = defaultValues[i];
+                document.getElementById(inputs[i].name).innerHTML = defaultValues[i];
+            }
+            inputs[i].addEventListener('keyup', function() {
+                formValues[this.name] = this.value;
+                document.getElementById(this.name).innerHTML = this.value;
+            }, false);
+        }
+    }
+    // build a little array with the defaultValues for each input
+    var defValues = ['', '', '', '', '',
+        '', '', '', '',
+        ''
+    ];
+    // this will push all inputs from the given form in the formValues object.
+    inputObj(document.forms[0], defValues);
+    </script>
+</body>
+
+</html>

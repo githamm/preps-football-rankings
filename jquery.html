@@ -1,0 +1,199 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js" integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+          font-family: sans-serif;
+        }
+        input {
+        margin: 0 3px 5px 0;
+        height: 25px;
+        }
+        .input-row {
+          margin-bottom: 5px;
+          padding: 10px;
+        }
+        #html-output-container {
+          background: #ffdab9;
+          padding: 30px;
+        }
+        .hide-show-container {
+          display: none;
+          background: #ffdab9;
+          margin-top: 20px;
+          padding: 1px 0 0 30px;
+        }
+    </style>
+    <script>
+        function copyToClipboard(containerid) {
+          if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+          } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            //alert("Text has been copied, now paste in the text-area")
+          }
+        }
+        </script>
+</head>
+
+<body>
+    <script id="table-output" type="text/x-handlebars-template">
+        <div id="html-output-container">
+            {{tableOutput}} 
+        </div>
+    </script>
+    <h1>Prep Football Rankings Table Generator</h1>
+    <p>Do each school classification (5A, 4A, 3A) separately and refresh page before generating a new table. Complete fields and click button to show the table preview and the code to copy and paste into WordPress.</p>
+    <form id="team-rankings-form">
+        <div class="input-row"><input type="text" name="class" value="Class "><br>
+            <input type="text" name="team" value="" placeholder="No. 1 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value=""><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 2 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value="#e8e8e8"><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 3 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value=""><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 4 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value="#e8e8e8"><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 5 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value=""><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 6 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value="#e8e8e8"><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 7 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value=""><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 8 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value="#e8e8e8"><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 9 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value=""><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row"><input type="text" name="team" value="" placeholder="No. 10 team">
+            <input type="text" name="record" value="" placeholder="Record">
+            <input type="text" name="previous" value="" placeholder="Previous">
+            <input type="text" name="lastweek" value="" placeholder="Last week" size="50">
+            <input type="hidden" name="color" value="#e8e8e8"><br>
+            <input type="text" name="comment" value="" placeholder="Comment" size="200"></div>
+        <div class="input-row">
+            <input type="submit" name="generate-table" value="Make me a table!" id="generate-table">
+        </div>
+    </form>
+    <div id="whole-table">
+        <div id="table-title"></div>
+        <div id="table-div"></div>
+    </div>
+    <div class="hide-show-container">
+        <h2>Table Code</h2>
+        <button id="copy-button" onclick="copyToClipboard('html-output-container')">Click to copy code</button>
+    </div>
+    <script>
+    $("form").on("submit", function(event) {
+        data = $(this).serializeArray();
+        event.preventDefault();
+        let teamData = [];
+        for (var i = 0; i < data.length; i++) {
+            var j = i + 1;
+            var k = j + 1;
+            var l = k + 1;
+            var m = l + 1;
+            var n = m + 1;
+            var thingtoAdd = {};
+            if (data[i].name === 'team') {
+                thingtoAdd.class = data[0].value
+                thingtoAdd.team = data[i].value
+                thingtoAdd.record = data[j].value
+                thingtoAdd.previous = data[k].value
+                thingtoAdd.lastweek = data[l].value
+                thingtoAdd.color = data[m].value
+                thingtoAdd.comment = data[n].value
+                teamData.push(thingtoAdd)
+            }
+        }
+        $(".hide-show-container").css("display", "block");
+        console.log(teamData);
+
+        var tableTitle = $('<h2>').text(teamData[0].class);
+        var table = $('<table id="rankings-table" width="100%" border="0" width="100%" cellspacing="3" cellpadding="8" style="border-collapse:collapse">');
+        var tr = $('<tr>');
+        var tableHeader = ['Team', 'Record', 'Pvs', 'LW'];
+
+        // Create table
+        for (var j = 0; j < tableHeader.length; j++) {
+            tr.append($('<th style="text-align:left;font-weight:bold;border-bottom:1px solid #000;padding:10px">').text(tableHeader[j]));
+        }
+        table.append(tr);
+
+        for (var i = 0; i < teamData.length; i++) {
+            var j = i + 1;
+            var tableRows = table.append(
+                // $('<tr style="background-color:' + teamData[i].color + '">').append(
+                $('<tr style="background-color:#e8e8e8;padding:10px">').append(
+                    $('<td style="font-weight:bold">').text(j + '. ' + teamData[i].team),
+                    $('<td>').text(teamData[i].record),
+                    $('<td>').text(teamData[i].previous),
+                    $('<td>').text(teamData[i].lastweek)),
+                // $('<tr style="background-color:' + teamData[i].color + '">').append(
+                $('<tr style="padding:10px">').append(
+                    $('<td colspan="4">').text(teamData[i].comment)
+                ));
+        }
+
+        $(document).ready(function() {
+            //table.css("border", "solid");
+            $('#table-title').append(tableTitle);
+            $('#table-div').append(table);
+            var tableHolder = document.getElementById('whole-table');
+            console.log(tableHolder.outerHTML);
+
+            var tableHtmlOutput = tableHolder.outerHTML;
+            var template = $('#table-output').html();
+            var context = { 'tableOutput': tableHtmlOutput };
+            var templateScript = Handlebars.compile(template);
+            var html = templateScript(context);
+            $(document.body).append(html);
+        })
+    });
+    </script>
+</body>
+
+</html>
